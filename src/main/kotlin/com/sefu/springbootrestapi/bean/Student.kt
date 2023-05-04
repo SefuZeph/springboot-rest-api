@@ -1,3 +1,3 @@
 package com.sefu.springbootrestapi.bean
 
-data class Student(var id: Int, var firstName: String, var lastName: String)
+data class Student(var id: Long, var firstName: String, var lastName: String)

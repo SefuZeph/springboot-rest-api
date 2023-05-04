@@ -2,6 +2,7 @@ package com.sefu.springbootrestapi.controller
 
 import com.sefu.springbootrestapi.bean.Student
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -20,5 +21,11 @@ class StudentController {
         student.add(Student(1, "John", "Doe"))
         student.add(Student(2, "Jane", "Doe"))
         return student
+    }
+
+    // http://localhost:8080/student/1/john
+    @GetMapping("student/{id}/{first-name}")
+    fun studentPathVariable(@PathVariable("id") studentId: Long, @PathVariable("first-name") studentName: String): Student {
+        return Student(studentId, studentName, "Doe")
     }
 }
