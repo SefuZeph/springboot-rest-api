@@ -3,6 +3,7 @@ package com.sefu.springbootrestapi.controller
 import com.sefu.springbootrestapi.bean.Student
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -25,7 +26,16 @@ class StudentController {
 
     // http://localhost:8080/student/1/john
     @GetMapping("student/{id}/{first-name}")
-    fun studentPathVariable(@PathVariable("id") studentId: Long, @PathVariable("first-name") studentName: String): Student {
+    fun studentPathVariable(
+        @PathVariable("id") studentId: Long, @PathVariable("first-name") studentName: String
+    ): Student {
         return Student(studentId, studentName, "Doe")
     }
+
+    // http://localhost:8080/students/query?id=3&name=zeph
+    @GetMapping("students/query")
+    fun queryStudentParams(@RequestParam id: Long, @RequestParam name: String): Student {
+        return Student(id, name, "Doe")
+    }
+
 }
