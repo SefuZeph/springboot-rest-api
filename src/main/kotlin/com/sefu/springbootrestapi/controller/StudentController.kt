@@ -1,9 +1,13 @@
 package com.sefu.springbootrestapi.controller
 
 import com.sefu.springbootrestapi.bean.Student
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -36,6 +40,17 @@ class StudentController {
     @GetMapping("students/query")
     fun queryStudentParams(@RequestParam id: Long, @RequestParam name: String): Student {
         return Student(id, name, "Doe")
+    }
+
+
+    // spring boot rest api that handles http post
+    @PostMapping("student/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun createStudent(@RequestBody student: Student): Student {
+        println("UserId ${student.id}")
+        println("First name ${student.firstName}")
+        println("Last name ${student.lastName}")
+        return student
     }
 
 }
