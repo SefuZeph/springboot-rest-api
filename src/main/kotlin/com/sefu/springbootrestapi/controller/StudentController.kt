@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -42,15 +43,19 @@ class StudentController {
         return Student(id, name, "Doe")
     }
 
-
-    // spring boot rest api that handles http post
+    // Create user
     @PostMapping("student/create")
     @ResponseStatus(HttpStatus.CREATED)
-    fun createStudent(@RequestBody student: Student): Student {
-        println("UserId ${student.id}")
-        println("First name ${student.firstName}")
-        println("Last name ${student.lastName}")
+    fun studentCreate(@RequestBody student: Student):Student{
         return student
     }
+
+    // Update user
+
+    @PutMapping("student/{id}/update")
+    fun updateStudent(@RequestBody student: Student,@PathVariable("id") studentId: Long):Student{
+        return student
+    }
+
 
 }
